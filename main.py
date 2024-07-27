@@ -1,5 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -21,10 +22,22 @@ window = tk.Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 
+timer_label = tk.Label(window, text="Timer", font=(FONT_NAME, 50), fg=GREEN, bg=YELLOW)
+timer_label.grid(column=1, row=1)
+
 canvas = tk.Canvas(window, width=205, height=224, bg=YELLOW, highlightthickness=0)
 tomato_img = ImageTk.PhotoImage(Image.open("tomato.png"))
 canvas.create_image(103, 112, image=tomato_img)
 canvas.create_text(103, 130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
-canvas.pack()
+canvas.grid(column=1, row=2)
+
+check_mark_label = tk.Label(window, text="✔", fg=GREEN, bg=YELLOW)
+check_mark_label.grid(column=1, row=5)
+
+button_start = tk.Button(text="start", bg=YELLOW, highlightthickness=0)
+button_start.grid(column=0, row=4)
+
+button_reset = tk.Button(text="reset", bg=YELLOW, highlightthickness=0)
+button_reset.grid(column=3, row=4)
 
 window.mainloop()
