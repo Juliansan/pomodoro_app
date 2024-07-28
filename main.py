@@ -12,13 +12,31 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
+reps = 0
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
-def start_timer(initial_count=5):
-    count_down(count=initial_count * 60)
+def start_timer():
+    global reps
+
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+
+    if reps in (0, 2, 4, 6):
+        count_down(count=work_sec)
+
+    if reps in (1, 3, 5):
+        count_down(count=short_break_sec)
+    else:
+        count_down(count=long_break_sec)
+
+    if reps < 7:
+        reps += 1
+    else:
+        reps = 0
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -38,8 +56,6 @@ def count_down(count: int):
 window = tk.Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
-
-new_time = window.after(1000, count_down)
 
 timer_label = tk.Label(window, text="Timer", font=(FONT_NAME, 50), fg=GREEN, bg=YELLOW)
 timer_label.grid(column=1, row=1)
