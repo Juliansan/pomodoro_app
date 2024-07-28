@@ -35,7 +35,7 @@ def start_timer():
     long_break_sec = LONG_BREAK_MIN * 60
 
     if reps in (0, 2, 4, 6):
-        timer_label["text"] = "Working"
+        timer_label.config(text="Working", fg=GREEN)
         count_down(count=work_sec)
     elif reps in (1, 3, 5):
         timer_label.config(text="Short-break", fg=BROWN)
@@ -64,7 +64,7 @@ def count_down(count: int):
             window.after(1000, count_down, count - 1)
         else:
             canvas.itemconfig(timer_text, text=f"00:00")
-
+            timer_label.config(text="STOP", fg=BROWN)
             reset = False
     else:
         check_mark_label.config(text="✓")
